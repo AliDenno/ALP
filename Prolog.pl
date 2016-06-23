@@ -11,3 +11,17 @@
 myLength([],0).
 myLength([X|Xs],N):- myLength(Xs,N1), N is N1+1. 
 %------------------------------------------------------------------------------------------------------------------------------%
+/**AD
+* A basic predicate that would only copy a list into another, but it is good to check the way the head is copied to the second list 
+* each time a recursive call is breaking out. 
+*/
+copy([],[]).
+copy([H|T], [H|X]):-  copy(T, X).
+%------------------------------------------------------------------------------------------------------------------------------% 
+/**AD
+* The predicate take a list and then return it in a reversed form, it keeps exhausting all the values of the list and when breaking the 
+* recursive call it appends the head to the reversed tail as a result list. 
+*/
+myReverse([],[]).
+myReverse([H|T],RList):-myReverse(T,RTail),append(RTail,[H],RList).
+%------------------------------------------------------------------------------------------------------------------------------% 
