@@ -16,12 +16,19 @@ myLength([X|Xs],N):- myLength(Xs,N1), N is N1+1.
 * each time a recursive call is breaking out. 
 */
 copy([],[]).
-copy([H|T], [H|X]):-  copy(T, X).
+copy([H|T], [H|X]):- copy(T, X).
 %------------------------------------------------------------------------------------------------------------------------------% 
 /**AD
 * The predicate take a list and then return it in a reversed form, it keeps exhausting all the values of the list and when breaking the 
 * recursive call it appends the head to the reversed tail as a result list. 
 */
 myReverse([],[]).
-myReverse([H|T],RList):-myReverse(T,RTail),append(RTail,[H],RList).
+myReverse([H|T],RList):- myReverse(T,RTail),append(RTail,[H],RList).
 %------------------------------------------------------------------------------------------------------------------------------% 
+/**AD
+* Succeeds iff Arg2 is Arg1 ‘shifted rotationally’ by one element to the left 
+* So Simply just add the head to the end of the list and fill them in the result. 
+*/
+shift([],[]).
+shift([A|T],Result):- append(T,[A],Result).
+%------------------------------------------------------------------------------------------------------------------------------%
