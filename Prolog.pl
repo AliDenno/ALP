@@ -32,3 +32,12 @@ myReverse([H|T],RList):- myReverse(T,RTail),append(RTail,[H],RList).
 shift([],[]).
 shift([A|T],Result):- append(T,[A],Result).
 %------------------------------------------------------------------------------------------------------------------------------%
+/**AD
+* A predicate that removes the first occurrence of Element in a List
+* So there are two conditions, when the head is not equal to the element, then we just append the head to the result, otherwise and if the head is equal to the element
+* We just go to the first clause, return the tail as the remaining result to append to previous heads and then simply return true and terminate. 
+*/
+removeFirst([H|T], H, T).
+removeFirst([H|T], E, [H|P]) :- E \= H,
+removeFirst(T, E, P).
+%------------------------------------------------------------------------------------------------------------------------------%
