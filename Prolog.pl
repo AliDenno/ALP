@@ -41,3 +41,10 @@ removeFirst([H|T], H, T).
 removeFirst([H|T], E, [H|P]) :- E \= H,
 removeFirst(T, E, P).
 %------------------------------------------------------------------------------------------------------------------------------%
+/**AD
+* A predicate that traverse the family tree, basically the first part of the body rule in the second clause is the pivot point,
+* where it’s trying the combinations of all parents and then trying to relate them together. 
+*/
+ancestor(Anc,Desc):- parent(Anc,Desc).
+ancestor(Anc,Desc):- parent(Anc,X), ancestor(X,Desc).
+%------------------------------------------------------------------------------------------------------------------------------%
