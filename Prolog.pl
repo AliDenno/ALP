@@ -78,3 +78,17 @@ last([_|Xs],X):-last(Xs,X).
 nth(1,[X|_],X).
 nth(N,[_|Xs],X):-N1 is N-1, nth(N1,Xs, X).
 %------------------------------------------------------------------------------------------------------------------------------%
+/**GK
+* The split/4 predicate succeeds if Arg3 is a list that contains all elements of Arg2 that are smaller than Arg1 
+* and Arg4 is a list that contains all elements of Arg2 that are bigger or equal to Arg1 
+*/
+split(_, [], [], []).
+split(E,[H|T],[H|S],B):-H < E, split(E,T,S,B).
+split(E,[H|T],S,[H|B]):-H >= E, split(E,T,S,B).
+%------------------------------------------------------------------------------------------------------------------------------%
+/**AD
+* Predicate that returns the sum of list element. 
+*/
+sum([],0).
+sum([H|T],S):- sum(T, ST), S is ST+H.
+%------------------------------------------------------------------------------------------------------------------------------%
