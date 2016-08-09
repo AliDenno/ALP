@@ -43,8 +43,20 @@ removeFirst(T, E, P).
 %------------------------------------------------------------------------------------------------------------------------------%
 /**AD
 * A predicate that traverse the family tree, basically the first part of the body rule in the second clause is the pivot point,
-* where it’s trying the combinations of all parents and then trying to relate them together. 
+* where it’s trying the combinations of all parents and then trying to relate them together. 	
 */
 ancestor(Anc,Desc):- parent(Anc,Desc).
 ancestor(Anc,Desc):- parent(Anc,X), ancestor(X,Desc).
+%------------------------------------------------------------------------------------------------------------------------------%
+/**GK
+* The predicate append(L1, L2, L12) suceeds iff Arg3 is the list that results from concatenating Arg2 and Arg1.
+*/
+/**AD
+* So the key Idea is that Every TL is decomposed into H|TL, so querying append([a,b],[c,d],L) at first the third argument L will be a|TL1 and this particular TL1
+* will get the value of [b|TL2] after its called recursively, in a same manner thi TL2 will be assigned the value of the termination clause [c,d] as L is passed to L 
+* which is traversed back.
+* in other words : H|'TL' ---> 'H|"TL1"' ----> "H|"'TL11'""  , so you can see how each TL is decomposed.
+*/
+append([],L,L).
+append([H|T],L,[H|TL]):-append(T,L,TL).
 %------------------------------------------------------------------------------------------------------------------------------%
