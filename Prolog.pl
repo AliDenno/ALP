@@ -60,3 +60,21 @@ ancestor(Anc,Desc):- parent(Anc,X), ancestor(X,Desc).
 append([],L,L).
 append([H|T],L,[H|TL]):-append(T,L,TL).
 %------------------------------------------------------------------------------------------------------------------------------%
+/**GK
+* The predicate member(Elem, List) suceeds iff Arg1 is an element of the list arg2 or unifiable with an element of Arg2. 
+*/
+member(E,[E|_]).
+member(E,[_|T]):-member(E,T).
+%------------------------------------------------------------------------------------------------------------------------------%
+/** Acessing List Elements
+* Acessing elements at different positions
+*/
+/* First */
+first([X|_],X).
+/* Last */
+last([X],X).
+last([_|Xs],X):-last(Xs,X).
+/* Position N */
+nth(1,[X|_],X).
+nth(N,[_|Xs],X):-N1 is N-1, nth(N1,Xs, X).
+%------------------------------------------------------------------------------------------------------------------------------%
