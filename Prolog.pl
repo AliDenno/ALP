@@ -10,6 +10,11 @@
 */
 myLength([],0).
 myLength([X|Xs],N):- myLength(Xs,N1), N is N1+1. 
+
+/* Accumulators */
+length_acc(L,N):-len_acc(L,0,N).
+len_acc([H|T],A,N):- A1 is A+1, len_acc(T,A1,N).
+len_acc([],A,A).
 %------------------------------------------------------------------------------------------------------------------------------%
 /**AD
 * A basic predicate that would only copy a list into another, but it is good to check the way the head is copied to the second list 
@@ -24,6 +29,11 @@ copy([H|T], [H|X]):- copy(T, X).
 */
 myReverse([],[]).
 myReverse([H|T],RList):- myReverse(T,RTail),append(RTail,[H],RList).
+
+/* Accumulators */
+reverse(L,RL):-reverse(L,[],RL).
+reverse([],RL,RL).
+reverse([Head|Tail],PreviousRL,RL):-reverse(Tail,[Head|PreviousRL],RL).
 %------------------------------------------------------------------------------------------------------------------------------% 
 /**AD
 * Succeeds iff Arg2 is Arg1 ‘shifted rotationally’ by one element to the left 
