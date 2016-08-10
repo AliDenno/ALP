@@ -102,3 +102,23 @@ split(E,[H|T],S,[H|B]):-H >= E, split(E,T,S,B).
 sum([],0).
 sum([H|T],S):- sum(T, ST), S is ST+H.
 %------------------------------------------------------------------------------------------------------------------------------%
+/**AD
+* Check if there is a path between two rooms, while remembering the visited element. 
+*/
+connected(X,Y):-door(X,Y).
+connected(X,Y):-door(Y,X).
+
+path(X,Y):-path(X,Y,[X]).
+path(X,Y,Visited):-connected(X,Y).
+path(X,Y,Visited):-connected(X,Z),not(member(Z,Visited)),path(Z,Y,[Z|Visited]).
+
+/* Improve it so no more linear time testing the list => constant time but we need clean up */
+connected(X,Y):-door(X,Y).
+connected(X,Y):-door(Y,X).
+
+path(X,Y):- retractall(visited(_)), assert(visited(X)), path_(X,Y).
+path_(X,Y):-connected(X,Y).
+path_(X,Y):-connected(X,Z), not(visited(Z)), assert(visited(Z)), path_(Z,Y).
+%------------------------------------------------------------------------------------------------------------------------------%
+
+%------------------------------------------------------------------------------------------------------------------------------%
