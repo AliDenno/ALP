@@ -120,5 +120,58 @@ path(X,Y):- retractall(visited(_)), assert(visited(X)), path_(X,Y).
 path_(X,Y):-connected(X,Y).
 path_(X,Y):-connected(X,Z), not(visited(Z)), assert(visited(Z)), path_(Z,Y).
 %------------------------------------------------------------------------------------------------------------------------------%
+/**Puzzle:
+1. Tick, Trick and Track are friends.
+2. One friend is 15, one 17, and one 18 years but we do not know who has which age.
+3. One friend’s last name is Chang.
+4. Miss Yang is three years older than Tick.
+5. The person whose last name is Thatcher is 17 years old.
+*/
+task_2_puzzle(FRIENDS):-
+FRIENDS = [ person(tick,_,_,female),
+person(trick,_,_,male),
+person(track,_,_,female)
+],
+member(person(_,_,15,_), FRIENDS),
+member(person(_,_,17,_), FRIENDS),
+member(person(_,_,18,_), FRIENDS),
+member(person(_,thatcher,17,_), FRIENDS),
+member(person(_,chang,_,_), FRIENDS),
+member(person(_,yang,A,female), FRIENDS),
+member(person(tick,_,B,_), FRIENDS),
+A is B+3.
+%------------------------------------------------------------------------------------------------------------------------------%
+/* Fails because the list [b|H] cannot be unified to the constant b. */
+[a,[b|H]|C]=[a,b,c,d]
+
+/* Fails because the list [b|H] cannot be unified to the constant b. */
+[a,[b,H|C]]=[a,b,c,d].
+
+/* {C <- [c,d] , B <- [b|H]} */
+[a,[b|H]|C]=[a,B,c,d].
+
+/* {A <- [X,Y] , B <- e , C <- y , D <- z} */
+[[X,Y],e|[y,z]]=[A,B,C,D]
+
+/* tail is larger than arguments on the right hand */
+[[X,Y],e|[y,z,q]]=[A,B,C,D].
+
+/* {C = 1, H = [2, 3, 4]} */
+[C|H]=[1,2,3,4].
+
+/* {C = 2, H = []} */
+[1,C|H]=[1,2].
+
+/* H = [c, d], C = []. */
+[[b|H]|C]=[[b,c,d]] 
+
+/* list with constant */
+[[b|H]|C]=[b,c,d].
+
+/* H = [c], C = a. */
+[a,[b|H],C]=[a,[b,c],a].
+
+/* again 2 is not a list  */
+[1,[C|H]]=[1,2,3].
 
 %------------------------------------------------------------------------------------------------------------------------------%
