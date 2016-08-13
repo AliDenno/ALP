@@ -250,3 +250,13 @@ replace([X|Rest],Eold,Enew,[X|NewRest]) :- % Keep head
 					not(X==Eold),
 					replace(Rest,Eold,Enew,NewRest).
 %------------------------------------------------------------------------------------------------------------------------------%
+% Interface predicate
+sum_square(L, Sum, Square) :-
+sum_square(L, 0, Sum, 0, Square). % Initialize accumulators to 0.
+% Implementation using accumulators.
+sum_square([], ASum, ASum, ASquare, ASquare) . % Terminal case
+sum_square([H|T], ASum, Sum, ASquare, Square) :- % Recursive case
+						NextASum is H+ASum,
+						NextASquare is H*H + ASquare,
+						sum_square(T, NextASum, Sum, NextASquare, Square).
+%------------------------------------------------------------------------------------------------------------------------------%
