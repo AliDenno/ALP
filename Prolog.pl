@@ -22,6 +22,12 @@ len_acc([],A,A).
 */
 copy([],[]).
 copy([H|T], [H|X]):- copy(T, X).
+
+/**AD
+* A basic predicate that would only copy a list into another incremented by 1
+*/
+Increment([],[]).
+Increment([H|T], [H1|X]):- H1 is H+1, Increment(T, X).
 %------------------------------------------------------------------------------------------------------------------------------% 
 /**AD
 * The predicate take a list and then return it in a reversed form, it keeps exhausting all the values of the list and when breaking the 
