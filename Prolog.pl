@@ -266,3 +266,13 @@ sum_square([H|T], ASum, Sum, ASquare, Square) :- % Recursive case
 						NextASquare is H*H + ASquare,
 						sum_square(T, NextASum, Sum, NextASquare, Square).
 %------------------------------------------------------------------------------------------------------------------------------%
+%% nested_loop(?Outer,?Inner) is nondet
+%
+% Succeeds if Inner and outer are IDs of loops
+% and Inner is nested within Outer.
+nested_loop(Outer,Inner) :-
+loop(Inner, _, _),
+ast_ancestor(Inner,Outer),
+loop(Outer, _, _).
+%------------------------------------------------------------------------------------------------------------------------------%
+
