@@ -275,4 +275,18 @@ loop(Inner, _, _),
 ast_ancestor(Inner,Outer),
 loop(Outer, _, _).
 %------------------------------------------------------------------------------------------------------------------------------%
+%% replace(+OldList, +OldElem, +NewElem, ?NewList).
+% 
+% Succeed whenever NewList is the list that can be obtained from OldList by           % replacing EACH occurrence of OldElem by NewElem. 
+
+replace([],_,_,[]).
+
+replace([Eold|Rest],Eold,Enew,[Enew|NewRest]) :-    % Replace
+   replace(Rest,Eold,Enew,NewRest).
+
+replace([X|Rest],Eold,Enew,[X|NewRest]) :-          % Keep head
+   not(X==Eold),
+   replace(Rest,Eold,Enew,NewRest).
+%------------------------------------------------------------------------------------------------------------------------------%
+
 
